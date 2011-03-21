@@ -13,9 +13,9 @@
 ActiveRecord::Schema.define(:version => 20110321001545) do
 
   create_table "seats", :force => true do |t|
-    t.integer  "seatnumber"
+    t.integer  "seat_number"
     t.boolean  "taken"
-    t.string   "assignedstudent"
+    t.string   "assigned_student"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
