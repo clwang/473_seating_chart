@@ -1,7 +1,7 @@
 	<style type="text/css" media="screen">
 		#seating_chart_panel{
 			background-color: black;
-			width: 1200px;
+			width: 1300px;
 		}
 		.side{
 			float: left;
@@ -20,7 +20,7 @@
 		}
 		.seat{
 			float: left;
-			width: 125px;
+			width: 145px;
 			height: 100px;
 			margin-left: 2.5px;
 			margin-right: 2.5px;
@@ -45,9 +45,32 @@
 										<% if seat.seat_number == counter %>
 											#<%= seat.seat_number%>
 											<% if seat.taken?%>
-												some one here
+												<%= seat.assigned_student %>
+													<% if user_signed_in? %>
+														<% if  current_user.email == seat.assigned_student %>
+															<%= form_for( :seat, :url => {:action => 'update', :id => seat.id} ) do |f| %>
+																<%= f.hidden_field( :taken, :value=> false ) %>
+																<%= f.hidden_field( :assigned_student, :value => " " ) %>
+																<%= submit_tag("Leave Seat") %>		
+															<% end %>
+														<% end %>
+													<% end %>
 											<% else %>
-												Not taken
+												<% if user_signed_in? %>
+														<% studentLogedHasSeatAlready = false %>
+														<% @seats.each do |s| %>
+															<% if s.assigned_student == current_user.email %>
+																<% studentLogedHasSeatAlready = true %>
+															<% end %>
+														<% end %>
+														<% if not studentLogedHasSeatAlready%>
+															<%= form_for( :seat, :url => {:action => 'update', :id => seat.id} ) do |f| %>
+																<%= f.hidden_field( :taken, :value=> true ) %>
+																<%= f.hidden_field( :assigned_student, :value => current_user.email ) %>
+																<%= submit_tag("Assign Seat") %>
+															<% end %>
+														<% end %>
+												<% end %>
 											<% end %>
 										<% end %>							   
 								 <% end %>

@@ -3,7 +3,10 @@ SeatingChart::Application.routes.draw do
   devise_for :users
   
   root :to => "seats#index"
-  match '/seats' => 'seats#index'
+  
+  resources :seats
+  
+  match 'seats/:id' => 'seats#update'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
