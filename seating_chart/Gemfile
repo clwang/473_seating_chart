@@ -9,6 +9,16 @@ gem 'sqlite3'
 
 gem 'devise'				#needed to allow the devise gem to be used
 
+##########################################
+
+
+gem 'json'
+gem 'eventmachine'
+gem 'juggernaut'
+
+
+
+##########################################
 # Use unicorn as the web server
 # gem 'unicorn'
 
