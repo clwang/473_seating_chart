@@ -5,6 +5,6 @@
     <label>Signed in as: <%= current_user.email %></label>
    	<%= link_to "Sign out", destroy_user_session_path %>
 <% else %>
-	<%= li2nk_to "Sign up", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %>
+	<%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %>
 <% end %>
 </header>

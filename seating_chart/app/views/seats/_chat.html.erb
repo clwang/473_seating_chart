@@ -1,12 +1,16 @@
 <div id="chat_window" class="round">
 	
-	<div id="chat_content">
-	
-		<% form_remote_tag(:url => { :controller => 'chat', :action => :add_line } ) do -%>
-		  Name: <%= text_field_tag( 'name','', { :size => 20, :id => 'name', :class => "input"} ) %>
-		  Message: <%= text_field_tag( 'entry','', { :size => 70, :id => 'entry', :class => "input"} ) %>
-		  <%= submit_tag "Say Something", :class => "common_button" %>
-		<% end -%>	
-	
+	<% form_tag(:url => { :controller => 'chat', :action => :add_line }) do -%>
+	  Name: <%= text_field_tag( 'name','', { :size => 20, :id => 'name', :class => "input"} ) %>
+	  Message: <%= text_field_tag( 'entry','', { :size => 70, :id => 'entry', :class => "input"} ) %>
+	  <%= submit_tag "Say Something", :class => "common_button" %>
+	<% end -%>
+
+	<br />
+
+	<div id="chat_window" class="bordered">
+		<ul id="chat_list">
+		</ul>
 	</div>
+	
 </div>
