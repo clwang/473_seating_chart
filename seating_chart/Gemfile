@@ -15,7 +15,8 @@ gem 'devise'				#needed to allow the devise gem to be used
 gem 'json'
 gem 'eventmachine'
 gem 'juggernaut'
-
+gem 'socky-server'
+gem 'pusher'
 
 
 ##########################################
