@@ -1,0 +1,7 @@
+gem "isolate-heroku", 
+gem "pusher",         
+gem "sinatra",        
+
+env :development, :test do
+  gem "rack-test", "0.5.7"
+end

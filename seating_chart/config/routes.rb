@@ -5,9 +5,13 @@ SeatingChart::Application.routes.draw do
   root :to => "seats#index"
   
   resources :seats
+  resources :chats
+  
   
   match 'seats/:id' => 'seats#update'
 
+  match '/msg' => 'chats#add_line'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

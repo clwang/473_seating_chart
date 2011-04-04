@@ -1,0 +1,4 @@
+isolate --version '= 3.0.0'
+isolate-heroku --version '= 1.1'
+pusher --version '= 0.7.0'
+sinatra --version '= 1.1.2'
