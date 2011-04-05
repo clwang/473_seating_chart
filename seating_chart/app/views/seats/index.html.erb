@@ -1,22 +1,11 @@
 <%= render 'header' %>
 
-
-
 <%= render 'seating_chart'%>
 
-<div id="chat_window" class="round">
-
-
-
-<form action="/messages" method="POST">
-  <label for="message">Enter your chat message here:</label>
-  <input type="text" name="message">
-  <input type="submit" value="Send!">
-</form>
-
-	    <ul id="message_list"></ul>
-
-
-</div>
+<%=
+	if user_signed_in?
+		render 'chat_window'
+	end
+ %>
 
 <%=render 'footer'%>

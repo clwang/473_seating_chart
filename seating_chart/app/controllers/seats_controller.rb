@@ -21,4 +21,5 @@ class SeatsController < ApplicationController
 		end
 	end
 
+	
 end

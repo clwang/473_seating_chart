@@ -16,7 +16,6 @@ gem 'json'
 gem 'eventmachine'
 gem 'socky-server'
 gem 'pusher'
-gem 'jquery-rails'
 gem 'sinatra'
 
 ##########################################

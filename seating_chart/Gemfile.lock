@@ -49,9 +49,6 @@ GEM
     escape_utils (0.2.3)
     eventmachine (0.12.10)
     i18n (0.5.0)
-    jquery-rails (0.2.7)
-      rails (~> 3.0)
-      thor (~> 0.14.4)
     json (1.5.1)
     json (1.5.1-x86-mingw32)
     mail (2.2.15)
@@ -90,7 +87,7 @@ GEM
       ruby-hmac
     sinatra (1.2.1)
       rack (~> 1.1)
-      tilt (>= 1.2.2, < 2.0)
+      tilt (< 2.0, >= 1.2.2)
     socky-server (0.4.0)
       em-http-request
       em-websocket (>= 0.1.4)
@@ -112,7 +109,6 @@ PLATFORMS
 DEPENDENCIES
   devise
   eventmachine
-  jquery-rails
   json
   pusher
   rails (= 3.0.5)
