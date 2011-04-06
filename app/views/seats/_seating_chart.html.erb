@@ -1,0 +1,52 @@
+<% counter = 1 %>
+<div id="seating_chart_panel" class="round">
+	<% for i in 1..2 %>
+		<div class="side">
+			<% for i in 1..4 %>
+				<div class="row">
+					<% for i in 1..4 %>
+						<div class="seat">
+								<div class="seat<%=counter%>">
+								<% @seats.each do |seat| %>
+										<% if seat.seat_number == counter %>
+											#<%= seat.seat_number%>
+											<% if seat.taken?%>
+												<%= seat.assigned_student %>
+													<% if user_signed_in? %>
+														<% if  current_user.email == seat.assigned_student %>
+															<%= form_for( :seat, :url => {:action => 'update', :id => seat.id} ) do |f| %>
+																<%= f.hidden_field( :taken, :value=> false ) %>
+																<%= f.hidden_field( :assigned_student, :value => " " ) %>
+																<%= submit_tag("Leave Seat") %>		
+															<% end %>
+														<% end %>
+													<% end %>
+											<% else %>
+												<% if user_signed_in? %>
+														<% studentLogedHasSeatAlready = false %>
+														<% @seats.each do |s| %>
+															<% if s.assigned_student == current_user.email %>
+																<% studentLogedHasSeatAlready = true %>
+															<% end %>
+														<% end %>
+														<% if not studentLogedHasSeatAlready%>
+															<%= form_for( :seat, :url => {:action => 'update', :id => seat.id} ) do |f| %>
+																<%= f.hidden_field( :taken, :value=> true ) %>
+																<%= f.hidden_field( :assigned_student, :value => current_user.email ) %>
+																<%= submit_tag("Assign Seat") %>
+															<% end %>
+														<% end %>
+												<% end %>
+											<% end %>
+										<% end %>							   
+								 <% end %>
+								</div>
+								<% counter = counter + 1 %>
+						</div>
+					<% end %>
+				</div>
+				<div class="clear"></div>
+			<% end %>	
+		</div>
+	<% end %>
+</div>

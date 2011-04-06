@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SeatingChart</title>
+ 
+<%= javascript_include_tag 'jquery','jquery-ui','jquery-form' %>
+
+
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js""></script>
+<![endif]-->
+<%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
+<%= stylesheet_link_tag 'blueprint/print', :media => 'print' %>
+<!-- [if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie' %><![endif]-->
+<%= stylesheet_link_tag 'application', :media => 'screen' %>
+
+ <script src="http://js.pusherapp.com/1.8/pusher.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  // Enable pusher logging - don't include this in production
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) window.console.log(message);
+  };
+
+  var pusher = new Pusher('dfc37692cce3244d3b5a');
+  var channel = pusher.subscribe('class_chat');
+  channel.bind('add_line', function(data) {
+	$("<li>").html(data).prependTo($("#message_list"))
+  })
+</script>
+
+  <%= csrf_meta_tag %>
+</head>
+<body>
+
+<div class="container">
+
+<%= yield %>
+
+</div>
+
+</body>
+</html>

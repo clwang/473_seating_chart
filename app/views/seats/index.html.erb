@@ -1,0 +1,11 @@
+<%= render 'header' %>
+
+<%= render 'seating_chart'%>
+
+<%=
+	if user_signed_in?
+		render 'chat_window'
+	end
+ %>
+
+<%=render 'footer'%>
