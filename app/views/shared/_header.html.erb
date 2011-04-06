@@ -1,0 +1,10 @@
+<header class="round">
+
+<h1> Welcome to Seating Chart and Classroom Chat </h1>
+<% if user_signed_in? %>
+    <label>Signed in as: <%= current_user.email %></label>
+   	<%= link_to "Sign out", destroy_user_session_path %>
+<% else %>
+	<%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %>
+<% end %>
+</header>
