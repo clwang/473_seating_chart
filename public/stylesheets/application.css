@@ -175,6 +175,7 @@ a.button {
           -webkit-border-radius: 3px;
           -moz-border-radius: 3px;
   text-decoration: none;
+  margin-left: 10px;
 }
 
 a.button:hover {
@@ -182,6 +183,7 @@ a.button:hover {
   transition: box-shadow 0.2s ease-in-out;
       -moz-transition: -moz-box-shadow 0.2s ease-in-out;
       -webkit-transition: -webkit-box-shadow 0.2s ease-in-out;
+  color: white;
 }
 
 

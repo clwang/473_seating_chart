@@ -17,7 +17,7 @@
 															<%= form_for( :seat, :url => {:action => 'update', :id => seat.id} ) do |f| %>
 																<%= f.hidden_field( :taken, :value=> false ) %>
 																<%= f.hidden_field( :assigned_student, :value => " " ) %>
-																<%= submit_tag("Leave Seat") %>		
+																<%= submit_tag("Leave Seat") %>
 															<% end %>
 														<% end %>
 													<% end %>
