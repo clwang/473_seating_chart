@@ -16,7 +16,6 @@ gem 'json'
 gem 'eventmachine'
 gem 'socky-server'
 gem 'pusher'
-gem 'sinatra'
 
 ##########################################
 # Use unicorn as the web server
