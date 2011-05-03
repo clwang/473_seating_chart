@@ -1,3 +1,9 @@
+<script>
+	$(document).ready(function(){
+		$('.leave_seat').hide();
+	}); 
+</script>
+
 <% counter = 1 %>
 <div id="seating_chart_panel" class="round">
 	<% for i in 1..2 %>
@@ -10,34 +16,70 @@
 								<% @seats.each do |seat| %>
 										<% if seat.seat_number == counter %>
 											#<%= seat.seat_number%>
-											<% if seat.taken?%>
-												<%= seat.assigned_student %>
-													<% if user_signed_in? %>
-														<% if  current_user.email == seat.assigned_student %>
-															<%= form_for( :seat, :url => {:action => 'update', :id => seat.id} ) do |f| %>
-																<%= f.hidden_field( :taken, :value=> false ) %>
-																<%= f.hidden_field( :assigned_student, :value => " " ) %>
-																<%= submit_tag("Leave Seat") %>
-															<% end %>
-														<% end %>
-													<% end %>
-											<% else %>
+												
 												<% if user_signed_in? %>
-														<% studentLogedHasSeatAlready = false %>
-														<% @seats.each do |s| %>
-															<% if s.assigned_student == current_user.email %>
-																<% studentLogedHasSeatAlready = true %>
-															<% end %>
-														<% end %>
-														<% if not studentLogedHasSeatAlready%>
-															<%= form_for( :seat, :url => {:action => 'update', :id => seat.id} ) do |f| %>
-																<%= f.hidden_field( :taken, :value=> true ) %>
-																<%= f.hidden_field( :assigned_student, :value => current_user.email ) %>
-																<%= submit_tag("Assign Seat") %>
-															<% end %>
-														<% end %>
+													<% if seat.assigned_student == current_user.email %>
+														<script>
+															$(document).ready(function(){
+																$('.assign_seat').hide();
+																
+																$('#leaveSeat<%= counter%> form').show();
+																
+															}); 
+															
+															
+														</script>
+													<% end %>
+  												<script>												
+  													$('#assign_submit<%=counter%>').live('click', function(){
+  													  var self = $(this);
+														console.log($(this).parent());
+  														$(this).parent().ajaxSubmit({
+                                							type: 'PUT',
+  															success: function() {
+                                  								$('.assign_seat').hide();
+                                  								console.log(self);
+  																self.parent().parent().find('form').first().show();
+  																$('#assigned_student<%=counter%> em').replaceWith("<em><%= current_user.email %></em>");
+  															}
+  														});
+  														return false;
+  													});
+													</script>
+													
+													<script>
+													
+  													$('#leave_submit<%=counter%>').live('click', function(){
+  														$(this).parent().ajaxSubmit({
+  															type: 'PUT',
+  															success: function(){
+  															  $('.leave_seat').hide();
+  																$('.assign_seat').show();
+  																$('#assigned_student<%=counter%> em').replaceWith("<em> </em>");
+  															}
+  														});
+  														return false;
+  													});	
+  												</script>
 												<% end %>
-											<% end %>
+												<div id="assigned_student<%=counter%>"><em><%= seat.assigned_student %></em></div>
+													<% if user_signed_in? %>
+													
+														<div id="leaveSeat<%= counter%>">
+														<%= form_for seat, :html => { :class => 'leave_seat' } do |f| %>
+														  <%= hidden_field_tag 'taken', 'false' %>
+														  <%= hidden_field_tag 'assigned_student', " " %>
+														  <%= submit_tag "Leave Seat", :id => "leave_submit#{counter}" %>
+														<% end %>
+														</div>
+														
+														<%= form_for seat, :html => { :class => 'assign_seat' } do |f| %>
+														  <%= hidden_field_tag 'taken', 'true' %>
+														  <%= hidden_field_tag 'assigned_student', "#{current_user.email}" %>
+														  <%= submit_tag "Assign Seat", :id => "assign_submit#{counter}" %>
+														<% end %>
+														
+													<% end %>
 										<% end %>							   
 								 <% end %>
 								</div>

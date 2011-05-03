@@ -8,6 +8,8 @@ SeatingChart::Application.routes.draw do
     
   resources :chats
   
+  resources :questions
+  
   match 'chats/push_message' => 'chats#push_message'
   match 'seats/:id' => 'seats#update'
 
